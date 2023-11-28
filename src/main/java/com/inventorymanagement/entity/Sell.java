@@ -10,27 +10,20 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 
-@Entity
 public class Sell {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	private Long productId;
 
-	@NotNull
-	@Max(value = 1000)
 	private Integer quantity;
 
-	@PastOrPresent
 	private Date orderDate;
 
 	public Sell() {
 		super();
 	}
 
-	public Sell(Long id, @NotNull Long productId, @NotNull @Max(1000) Integer quantity, @PastOrPresent Date orderDate) {
+	public Sell(Long id, Long productId, Integer quantity, Date orderDate) {
 		super();
 		this.id = id;
 		this.productId = productId;
