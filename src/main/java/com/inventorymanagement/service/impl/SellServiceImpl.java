@@ -24,71 +24,24 @@ import com.inventorymanagement.service.SellService;
 @Service
 public class SellServiceImpl implements SellService {
 
-	@Autowired
-	private SellRepository sellRepository;
-
-	@Autowired
-	private ProductRepository productRepository;
-
 	@Override
 	public List<SellDTO> getAllSells() {
-		List<Sell> sells = sellRepository.findAll();
-		return sells.stream().map(this::convertToDTO).collect(Collectors.toList());
+		return null;
 	}
 
 	@Override
 	public SellDTO getSellById(Long id) {
-		Optional<Sell> optionalSell = sellRepository.findById(id);
-		if (optionalSell.isPresent()) {
-			return convertToDTO(optionalSell.get());
-		} else {
-			throw new NotFoundException("Sell not found");
-		}
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public SellDTO createSell(SellDTO sellDTO) {
-		Sell sell = convertToEntity(sellDTO);
-		sell = sellRepository.save(sell);
-		return convertToDTO(sell);
-	}
-
-	private SellDTO convertToDTO(Sell sell) {
-		SellDTO sellDTO = new SellDTO();
-		sellDTO.setId(sell.getId());
-		sellDTO.setProductId(sell.getProductId());
-		sellDTO.setQuantity(sell.getQuantity());
-		sellDTO.setOrderDate(sell.getOrderDate());
-		// Set other fields as needed
-		return sellDTO;
-	}
-
-	private Sell convertToEntity(SellDTO sellDTO) {
-		Sell sell = new Sell();
-		sell.setProductId(sellDTO.getProductId());
-		sell.setQuantity(sellDTO.getQuantity());
-		sell.setOrderDate(sellDTO.getOrderDate());
-		return sell;
+		return null;
 	}
 
 	@Override
 	public Map<String, Integer> getProductsSoldInLastMonth() {
-		LocalDate last30DaysStart = LocalDate.now().minusDays(30);
-	    LocalDate today = LocalDate.now();
-	    Date last30DaysStartDate = Date.from(last30DaysStart.atStartOfDay(ZoneId.systemDefault()).toInstant());
-	    Date todayEndDate = Date.from(today.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant());
-		List<Sell> sellsInLastMonth = sellRepository.findSellsInLastMonth(last30DaysStartDate, todayEndDate);
-		Map<String, Integer> productSalesMap = new HashMap<>();
-		for (Sell sell : sellsInLastMonth) {
-			Long productId = sell.getProductId();
-			Product product = productRepository.findById(productId)
-					.orElseThrow(() -> new NotFoundException("Product not found for ID: " + productId));
-			String productName = product.getName();
-			int quantitySold = sell.getQuantity();
-			productSalesMap.merge(productName, quantitySold, Integer::sum);
-		}
-		return productSalesMap;
+		return null;
 	}
-
 }
