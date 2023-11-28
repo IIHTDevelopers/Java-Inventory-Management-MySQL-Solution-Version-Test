@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public boolean deleteProduct(Long id) {
-		return null;
+		return false;
 	}
 
 }
