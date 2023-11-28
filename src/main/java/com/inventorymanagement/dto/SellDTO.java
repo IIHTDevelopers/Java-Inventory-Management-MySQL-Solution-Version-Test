@@ -10,23 +10,19 @@ import jakarta.validation.constraints.PastOrPresent;
 public class SellDTO implements Serializable {
 	private Long id;
 
-	@NotNull(message = "Product ID is required")
 	private Long productId;
 
-	@NotNull(message = "Quantity is required")
-	@Max(value = 1000, message = "Quantity cannot exceed 1000")
 	private Integer quantity;
 
-	@PastOrPresent(message = "Order date must be in the past or present")
 	private Date orderDate;
 
 	public SellDTO() {
 		super();
 	}
 
-	public SellDTO(Long id, @NotNull(message = "Product ID is required") Long productId,
-			@NotNull(message = "Quantity is required") @Max(value = 1000, message = "Quantity cannot exceed 1000") Integer quantity,
-			@PastOrPresent(message = "Order date must be in the past or present") Date orderDate) {
+	public SellDTO(Long id, Long productId,
+			Integer quantity,
+			Date orderDate) {
 		super();
 		this.id = id;
 		this.productId = productId;
