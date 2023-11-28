@@ -9,11 +9,8 @@ import jakarta.validation.constraints.Size;
 public class ProductDTO implements Serializable {
 	private Long id;
 
-	@NotEmpty(message = "Product name is required")
-	@Size(min = 3, max = 255, message = "Product name must be between 3 and 255 characters")
 	private String name;
 
-	@DecimalMin(value = "0.01", message = "Product price must be greater than 0.01")
 	private Double price;
 
 	public ProductDTO() {
@@ -21,8 +18,8 @@ public class ProductDTO implements Serializable {
 	}
 
 	public ProductDTO(Long id,
-			@NotEmpty(message = "Product name is required") @Size(min = 3, max = 255, message = "Product name must be between 3 and 255 characters") String name,
-			@DecimalMin(value = "0.01", message = "Product price must be greater than 0.01") Double price) {
+			String name,
+			Double price) {
 		super();
 		this.id = id;
 		this.name = name;
