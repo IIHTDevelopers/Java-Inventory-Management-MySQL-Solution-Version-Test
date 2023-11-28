@@ -17,75 +17,32 @@ import com.inventorymanagement.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	@Autowired
-	private ProductRepository productRepository;
-
 	@Override
 	public List<ProductDTO> getAllProducts() {
-		List<Product> products = productRepository.findAll();
-		return products.stream().map(this::convertToDTO).collect(Collectors.toList());
+		return null;
 	}
 
 	@Override
 	public ProductDTO getProductById(Long id) {
-		Optional<Product> optionalProduct = productRepository.findById(id);
-		if (optionalProduct.isPresent()) {
-			return convertToDTO(optionalProduct.get());
-		} else {
-			throw new NotFoundException("Product not found");
-		}
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public ProductDTO createProduct(ProductDTO productDTO) {
-		Product product = convertToEntity(productDTO);
-		product = productRepository.save(product);
-		return convertToDTO(product);
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public ProductDTO updateProduct(Long id, ProductDTO productDTO) {
-		Optional<Product> optionalProduct = productRepository.findById(id);
-		if (optionalProduct.isPresent()) {
-			Product product = optionalProduct.get();
-			product.setName(productDTO.getName());
-			product.setPrice(productDTO.getPrice());
-			product = productRepository.save(product);
-			return convertToDTO(product);
-		} else {
-			throw new NotFoundException("Product not found");
-		}
+		return null;
 	}
 
 	@Override
 	@Transactional
 	public boolean deleteProduct(Long id) {
-		Optional<Product> optionalProduct = productRepository.findById(id);
-		if (optionalProduct.isPresent()) {
-			productRepository.deleteById(id);
-			return true;
-		} else {
-			throw new NotFoundException("Product not found");
-		}
+		return null;
 	}
 
-	private ProductDTO convertToDTO(Product product) {
-		ProductDTO productDTO = new ProductDTO();
-		productDTO.setId(product.getId());
-		productDTO.setName(product.getName());
-		productDTO.setPrice(product.getPrice());
-		// Set other fields as needed
-		return productDTO;
-	}
-
-	private Product convertToEntity(ProductDTO productDTO) {
-		System.out.println(productDTO);
-		Product product = new Product();
-		product.setName(productDTO.getName());
-		product.setPrice(productDTO.getPrice());
-		// Set other fields as needed
-		return product;
-	}
 }
